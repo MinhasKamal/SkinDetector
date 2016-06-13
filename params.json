@@ -1,0 +1,6 @@
+{
+  "name": "Skin Detector",
+  "tagline": "Detects human skin from image.",
+  "body": "# SKIN DETECTOR\r\n1. Integrate OpenCV with the project. (OpenCV is used only for reading and writing image)\r\n2. For training the sytem run **SkinDetectorTrain.java**.\r\n3. Then run **SkinDetectorTest.java** or **SkinDetectorTest2.java** for getting output (change file-paths in the main method according to the need).\r\n\r\n# License\r\n<a rel=\"license\" href=\"http://www.gnu.org/licenses/gpl.html\"><img alt=\"GNU General Public License\" style=\"border-width:0\" src=\"http://www.gnu.org/graphics/gplv3-88x31.png\" /></a><br/>SkinDetector is licensed under a <a rel=\"license\" href=\"http://www.gnu.org/licenses/gpl.html\">GNU General Public License version-3</a>.\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
