@@ -1,5 +1,5 @@
 # SkinDetector
-## Detects human skin from image.
+#### Detects human skin from image.
 
 ### How to Run?
 1. Integrate [Egami](https://github.com/MinhasKamal/Egami) with the project. Egami is used only for reading and writing image.
