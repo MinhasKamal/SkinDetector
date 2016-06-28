@@ -1,4 +1,4 @@
-# Skin Detector
+# :dancer: Skin Detector
 #### Detects Human Skin From Image
 [This program](http://minhaskamal.github.io/SkinDetector) is a very simple machine learning implementation. Only by altering training data it can detect any type of region based on pixel.
 
