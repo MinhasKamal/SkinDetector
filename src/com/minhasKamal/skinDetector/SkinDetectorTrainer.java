@@ -1,3 +1,9 @@
+/***********************************************************
+* Developer: Minhas Kamal (minhaskamal024@gmail.com)       *
+* Date: May-2015                                           *
+* License: MIT License                                     *
+***********************************************************/
+
 package com.minhasKamal.skinDetector;
 
 import java.io.BufferedWriter;
@@ -5,8 +11,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.minhaskamal.egami.matrix.Matrix;
 
 public class SkinDetectorTrainer {
 	public void train(String imageFolderPath, String maskFolderPath) throws Exception{
@@ -27,8 +31,6 @@ public class SkinDetectorTrainer {
 			matImageTemp = new Matrix(imageFilePaths[i], Matrix.RED_GREEN_BLUE);
 			matMaskTemp = new Matrix(maskFilePaths[i], Matrix.RED_GREEN_BLUE);
 			
-//			System.out.println(imageFilePaths[i]);
-//			System.out.println(maskFilePaths[i]);
 			readSkinColor(matImageTemp, matMaskTemp, skinPixelNumber, nonskinPixelNumber);
 			
 			System.out.println("Image Processed: " + i);	//notification
@@ -89,7 +91,6 @@ public class SkinDetectorTrainer {
 		
 		int totalSkinPixelNumber=0;
 		int totalNonskinPixelNumber=0;
-		
 		for(int i=0; i<256; i++){
 			for(int j=0; j<256; j++){
 				for(int k=0; k<256; k++){
@@ -98,6 +99,7 @@ public class SkinDetectorTrainer {
 				}
 			}
 		}
+		
 		double totalNonskinSkinPixelRatio = totalNonskinPixelNumber / totalSkinPixelNumber;
 		double ratio=0;
 		double doubleTemp1, doubleTemp2;

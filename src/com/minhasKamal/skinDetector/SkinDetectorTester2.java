@@ -1,10 +1,14 @@
+/***********************************************************
+* Developer: Minhas Kamal (minhaskamal024@gmail.com)       *
+* Date: May-2015                                           *
+* License: MIT License                                     *
+***********************************************************/
+
 package com.minhasKamal.skinDetector;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import com.minhaskamal.egami.matrix.Matrix;
 
 public class SkinDetectorTester2 {
 	
