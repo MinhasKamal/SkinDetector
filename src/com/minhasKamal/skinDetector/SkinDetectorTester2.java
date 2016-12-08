@@ -13,7 +13,7 @@ import java.io.IOException;
 public class SkinDetectorTester2 {
 	
 	public void recogniseImage(String testImagePath, String knowledgeFilePath) throws Exception{
-		recogniseImage(testImagePath, knowledgeFilePath, 0.7);
+		recogniseImage(testImagePath, knowledgeFilePath, 0.15);
 	}
 	
 	public void recogniseImage(String testImagePath, String knowledgeFilePath, double threshHold) throws Exception{
@@ -25,7 +25,7 @@ public class SkinDetectorTester2 {
 		double[][][] ratio = getData(knowledgeFilePath);
 		
 		Matrix matImage = new Matrix(testImagePath, Matrix.RED_GREEN_BLUE);
-		Matrix matMask = new Matrix(matImage.getRows(), matImage.getRows(), matImage.getType());
+		Matrix matMask = new Matrix(matImage.getRows(), matImage.getCols(), matImage.getType());
 		
 		System.out.println("\n\n## \t\tProcessing Image...");	//notification
 		int rows = matImage.getRows();
@@ -40,6 +40,7 @@ public class SkinDetectorTester2 {
 				}else{
 					matMask.pixels[row][col] = blackDot.clone();
 				}
+				
 			}
 		}
 		

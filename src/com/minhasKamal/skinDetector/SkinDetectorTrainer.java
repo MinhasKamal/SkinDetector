@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SkinDetectorTrainer {
+	public SkinDetectorTrainer() {
+
+	}
+	
+	
 	public void train(String imageFolderPath, String maskFolderPath) throws Exception{
 		train(imageFolderPath, maskFolderPath, imageFolderPath+"_knowledge.dat");
 	}
@@ -38,12 +43,17 @@ public class SkinDetectorTrainer {
 		
 		try {
 			System.out.println("\n\n### \t\tProcessing data...");	//notification
-			getMainRation(skinPixelNumber, nonskinPixelNumber, outputFilePath);
+			caculteProbability(skinPixelNumber, nonskinPixelNumber, outputFilePath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	///////////////////////////////////////
+	
+	/**
+	 * returns all file path in the root folder
+	 */
 	private String[] getAllFiles(String folderPath) {
 		File[] files = new File(folderPath).listFiles();
 		ArrayList<String> filePathList = new ArrayList<String>();
@@ -58,6 +68,11 @@ public class SkinDetectorTrainer {
 		return filePaths;
 	}
 	
+	/////////////////////////////////////////
+	
+	/**
+	 * counts pixels of skin and non-skin in a image
+	 */
 	private void readSkinColor(Matrix matImage, Matrix matMask, int[][][] skinPixelNumber, int[][][] nonskinPixelNumber){
 		int rows = matImage.getRows(),
 			cols = matImage.getCols();
@@ -86,7 +101,12 @@ public class SkinDetectorTrainer {
 		}
 	}
 	
-	private void getMainRation(int[][][] skinPixelNumber, int[][][] nonskinPixelNumber,
+	///////////////////////////////////////////
+	
+	/**
+	 * calculates probability of a pixel resembling skin.
+	 */
+	private void caculteProbability(int[][][] skinPixelNumber, int[][][] nonskinPixelNumber,
 			String outputFilePath) throws IOException {
 		
 		int totalSkinPixelNumber=0;
@@ -94,40 +114,37 @@ public class SkinDetectorTrainer {
 		for(int i=0; i<256; i++){
 			for(int j=0; j<256; j++){
 				for(int k=0; k<256; k++){
+					skinPixelNumber[i][j][k] ++;
 					totalSkinPixelNumber += skinPixelNumber[i][j][k];
+					
+					nonskinPixelNumber[i][j][k] ++;
 					totalNonskinPixelNumber += nonskinPixelNumber[i][j][k];
 				}
 			}
 		}
 		
-		double totalNonskinSkinPixelRatio = totalNonskinPixelNumber / totalSkinPixelNumber;
-		double ratio=0;
-		double doubleTemp1, doubleTemp2;
+		double probabilityOfSkin = (double) totalSkinPixelNumber/(totalNonskinPixelNumber+totalSkinPixelNumber);
+		double probability=0;
 		BufferedWriter mainBW = new BufferedWriter(new FileWriter(outputFilePath));
 		mainBW.write("");
 		for(int i=0; i<256; i++){
 			for(int j=0; j<256; j++){
 				for(int k=0; k<256; k++){
-					doubleTemp1 = skinPixelNumber[i][j][k] * totalNonskinSkinPixelRatio;
-					doubleTemp2 = nonskinPixelNumber[i][j][k];
-					
-					if(doubleTemp2==0){
-						ratio=1;
-					}else{
-						ratio=doubleTemp1/doubleTemp2;
-					}
-					
-					mainBW.append(ratio+"\n");
+										
+					probability = skinPixelNumber[i][j][k]*probabilityOfSkin
+							/(skinPixelNumber[i][j][k]+nonskinPixelNumber[i][j][k]);
+					mainBW.append(String.format("%.3f\n", probability));
 				}
 			}
 			
 			System.out.print(".");	//notification
 		}
-		
 		mainBW.close();
 		
 		return ;
 	}
+	
+	//////////////////////////////////////////////
 	
 	/** MAIN **/
 	public static void main(String[] args) {

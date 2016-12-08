@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class SkinDetectorTester {
 	public void recogniseImage(String testImagePath, String knowledgeFilePath) throws Exception{
-		recogniseImage(testImagePath, knowledgeFilePath, 0.7);
+		recogniseImage(testImagePath, knowledgeFilePath, 0.15);
 	}
 	
 	public void recogniseImage(String testImagePath, String knowledgeFilePath, double threshHold) throws Exception{
@@ -24,7 +24,7 @@ public class SkinDetectorTester {
 		double[][][] ratio = getData(knowledgeFilePath);
 		
 		Matrix matImage = new Matrix(testImagePath, Matrix.RED_GREEN_BLUE);
-		Matrix matMask = new Matrix(matImage.getRows(), matImage.getRows(), Matrix.BLACK_WHITE);
+		Matrix matMask = new Matrix(matImage.getRows(), matImage.getCols(), Matrix.BLACK_WHITE);
 		
 		System.out.println("\n\n## \t\tProcessing Image...");	//notification
 		int rows = matImage.getRows();
