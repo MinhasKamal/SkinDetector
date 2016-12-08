@@ -1,6 +1,7 @@
 # :dancer: Skin Detector
 #### Detects Human Skin From Image
-[This program](http://minhaskamal.github.io/SkinDetector) is a very simple machine learning implementation. Only by altering training data it can detect any type of region based on pixel value.
+
+[This program](http://minhaskamal.github.io/SkinDetector) is a very simple machine learning implementation for image region segmentation. Only by altering training data it can detect any type of region based on pixel value.
 
 ### How to Run?
 1. For training the system run **SkinDetectorTrainer.java**. After training a knowledge file is created.
@@ -23,7 +24,7 @@
      </div>
   
 ### How It Works?
-We have used [naive Bayes](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) here for classification (skin or non-skin pixel). As it is a colour image there are 256*256*256 types of pixels. 
+We have used [naive Bayes](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) here for classification (skin or non-skin pixel). As it is a colour image there are 256\*256\*256 types of pixels. 
 
 In the training phase, pixel frequencies of being skin or non-skin is calculated. We take every pixel of the image and see if it is a pixel of skin by using the mask. If the pixel is on skin, we increase its skin-frequency. Else we increase the non-skin-frequency. After processing all images, probability of a skin-pixels is calculated from the frequency using Bayes Theorem. We store this data in a file.
 
